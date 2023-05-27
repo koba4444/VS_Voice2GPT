@@ -7,6 +7,9 @@ import { TELEGRAM_TOKEN, OPENAI_API_KEY, TEST_ENV} from "../constants/index.js";
 import {ogg} from "./ogg.js"
 import { openai } from "./openai.js";
 
+
+
+
 console.log("HIHIHIHIIHIHIHIHIH")
 const INITIAL_SESSION = {
     messages: [],
@@ -26,6 +29,12 @@ bot.command("new", async(ctx) => {
 bot.command("start", async(ctx) => {
     ctx.session = INITIAL_SESSION;
     await ctx.reply("Жду вашего голосового или текстового сообщения");
+});
+
+bot.on(message("text"), async(ctx) => {
+    console.log(ctx.session);
+    ctx.session ??= INITIAL_SESSION;
+    await ctx.reply(code("Я тут"));
 });
 bot.on(message("voice"), async(ctx) => {
     console.log(ctx.session);
